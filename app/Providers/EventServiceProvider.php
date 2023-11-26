@@ -6,6 +6,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Models\Tenant;
+use App\Observers\TenantObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,10 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
+    protected $observers = [
+        Tenant::class => [TenantObserver::class],
+    ];
+
     /**
      * Register any events for your application.
      *
@@ -27,7 +33,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Tenant::observe(TenantObserver::class);
     }
 
     /**
