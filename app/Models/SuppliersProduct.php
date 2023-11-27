@@ -36,7 +36,7 @@ class SuppliersProduct extends Model
         return $this->supplier_id;
     }
 
-    public function getProductCode(): int
+    public function getProductCode(): string
     {
         return $this->product_code;
     }

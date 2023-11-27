@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Supplier extends Model
+class ProductsCode extends Model
 {
     use HasFactory;
 
@@ -24,7 +24,7 @@ class Supplier extends Model
         return $this->id;
     }
 
-    public function getCode(): int
+    public function getCode(): string
     {
         return $this->code;
     }
