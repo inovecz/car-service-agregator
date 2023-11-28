@@ -90,6 +90,16 @@
                         >
                           Dodavatel
                         </th>
+                        <th
+                          class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                        >
+                          Cena
+                        </th>
+                        <th
+                          class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                        >
+                          Dostupnost
+                        </th>
                       </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-slate-800">
@@ -108,6 +118,16 @@
                           class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"
                         >
                           {{ product.supplier_name }}
+                        </td>
+                        <td
+                          class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"
+                        >
+                          {{ product.price }}
+                        </td>
+                        <td
+                          class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"
+                        >
+                          {{ product.availability }}
                         </td>
                       </tr>
                     </tbody>

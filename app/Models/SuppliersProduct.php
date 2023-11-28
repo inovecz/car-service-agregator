@@ -41,5 +41,15 @@ class SuppliersProduct extends Model
         return $this->product_code;
     }
 
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function getAvailability(): ?string
+    {
+        return $this->availability;
+    }
+
 
 }
