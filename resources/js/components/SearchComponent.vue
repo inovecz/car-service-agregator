@@ -31,6 +31,36 @@
             </div>
           </div>
         </form>
+        <div v-if="loading" class="mt-3 flex justify-center">
+          <span
+            
+            class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 transition ease-in-out duration-150"
+            
+          >
+            <svg
+              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Načítám...
+          </span>
+        </div>
+
         <div v-if="products.length" class="mt-3">
           <div class="grid grid-flow-col">
             <div
@@ -105,16 +135,19 @@ export default {
     return {
       searchCode: null,
       products: [],
+      loading: false
     };
   },
 
   methods: {
     searchProducts() {
       let self = this;
+      self.loading = true;
       let queryString = '?productCode=' + self.searchCode;
 
       http.get('/search-products' + queryString).then((response) => {
         self.products = response.data.products;
+        self.loading = false;
       });
     },
   },
