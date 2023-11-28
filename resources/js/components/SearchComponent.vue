@@ -21,15 +21,34 @@
             </div>
           </div>
         </form>
+        <div v-if="products">Tu budou produkty</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import http from '@/http';
+
 export default {
-  mounted() {
-    
+  mounted() {},
+
+  data() {
+    return {
+      searchCode: null,
+      products: [],
+    };
+  },
+
+  methods: {
+    searchProducts() {
+      let self = this;
+      let queryString = '?productCode=' + self.searchCode;
+
+      http.get('search-products' + queryString).then((response) => {
+        self.products;
+      });
+    },
   },
 };
 </script>
