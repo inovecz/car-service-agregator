@@ -9,11 +9,11 @@ Alpine.start();
 
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
 
-import ExampleComponent from './components/ExampleComponent.vue';
+import SearchComponent from './components/SearchComponent.vue';
 
 
 const app = createApp({});
 
-app.component('ExampleComponent', ExampleComponent);
+app.component('SearchComponent', SearchComponent);
 
 const mountedApp = app.mount('#app');
