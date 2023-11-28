@@ -4,13 +4,13 @@
       <div class="p-6 text-gray-900">
         <form @submit.prevent="searchProducts()">
           <div class="flex items-center justify-center">
-            <div class="flex border-2 rounded">
+            <div class="flex border-2 rounded w-full">
               <input
                 v-model="searchCode"
                 type="text"
                 id="searchCode"
                 name="searchCode"
-                class="px-4 py-2 w-80"
+                class="px-4 py-2 w-full"
                 placeholder="Search..."
               />
               <button
