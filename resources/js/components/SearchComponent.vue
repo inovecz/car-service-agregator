@@ -2,11 +2,21 @@
   <div class="mt-3">
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
       <div class="p-6 text-gray-900">
-        <form>
+        <form @submit.prevent="searchProducts()">
           <div class="flex items-center justify-center">
             <div class="flex border-2 rounded">
-              <input type="text" class="px-4 py-2 w-80" placeholder="Search..." />
-              <button class="flex items-center justify-center px-4 border-l">
+              <input
+                v-model="searchCode"
+                type="text"
+                id="searchCode"
+                name="searchCode"
+                class="px-4 py-2 w-80"
+                placeholder="Search..."
+              />
+              <button
+                type="submit"
+                class="flex items-center justify-center px-4 border-l"
+              >
                 <svg
                   class="w-6 h-6 text-gray-600"
                   fill="currentColor"
@@ -21,7 +31,7 @@
             </div>
           </div>
         </form>
-        <div v-if="products">Tu budou produkty</div>
+        <div v-if="products">Tu budou produkty<br />{{ products }}</div>
       </div>
     </div>
   </div>
@@ -45,8 +55,8 @@ export default {
       let self = this;
       let queryString = '?productCode=' + self.searchCode;
 
-      http.get('search-products' + queryString).then((response) => {
-        self.products;
+      http.get('/search-products' + queryString).then((response) => {
+        self.products = response.data.products;
       });
     },
   },

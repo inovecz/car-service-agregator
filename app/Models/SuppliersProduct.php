@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Supplier;
-use App\Models\ProductCode;
+use App\Models\ProductsCode;
 
 class SuppliersProduct extends Model
 {
@@ -17,12 +17,12 @@ class SuppliersProduct extends Model
     //Relationships
     public function supplier(): ?HasOne
     {
-        return $this->hasOne(Supplier::class, 'supplier_id', 'id');
+        return $this->hasOne(Supplier::class, 'id', 'supplier_id');
     }
 
     public function productCode(): HasOne
     {
-        return $this->hasOne(ProductCode::class, 'product_code', 'code');
+        return $this->hasOne(ProductsCode::class, 'code', 'product_code');
     }
 
     //Getters

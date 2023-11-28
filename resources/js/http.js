@@ -1,9 +1,11 @@
 import axios from 'axios';
+import authHeader from './services/auth-header';
 
 let domain = 'agregator.lan';
 
 let myAxios = axios.create({
     baseURL: 'http://' + domain + '/api',
+    headers: authHeader()
 });
 
 
