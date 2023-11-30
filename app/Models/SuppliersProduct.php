@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Supplier;
 use App\Models\ProductsCode;
+use App\Models\SuppliersProductsPrice;
 
 class SuppliersProduct extends Model
 {
@@ -23,6 +24,11 @@ class SuppliersProduct extends Model
     public function productCode(): HasOne
     {
         return $this->hasOne(ProductsCode::class, 'code', 'product_code');
+    }
+
+    public function suppliersProductsPrices(): HasMany
+    {
+        return $this->hasMany(SuppliersProductsPrice::class, 'supplier_product_id', 'id');
     }
 
     //Getters
