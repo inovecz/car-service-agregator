@@ -51,5 +51,10 @@ class SuppliersProduct extends Model
         return $this->availability;
     }
 
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
 
 }

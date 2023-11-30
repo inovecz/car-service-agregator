@@ -59,7 +59,7 @@
           </span>
         </div>
 
-        <div v-if="products.length" class="mt-3">
+        <div v-if="products && products.length" class="mt-3">
           <div class="grid grid-flow-col">
             <div
               class="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25"
@@ -183,7 +183,9 @@
                         >
                           Dostupnost<span :class="sortIcon('availability')"> </span>
                         </th>
-                        <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"></th>
+                        <th
+                          class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                        ></th>
                       </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-slate-800">
@@ -213,7 +215,19 @@
                         >
                           {{ product.availability }}
                         </td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"><i class="bi bi-eye text-lg"></i></td>
+                        <td
+                          class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"
+                          style="display: table-cell"
+                        >
+                          <div class="flex justify-end">
+                            <a
+                              v-if="product && product.url"
+                              :href="'//' + product.url"
+                              target="_blank"
+                              ><i class="bi bi-eye text-lg"></i
+                            ></a>
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
