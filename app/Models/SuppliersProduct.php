@@ -41,9 +41,44 @@ class SuppliersProduct extends Model
         return $this->product_code;
     }
 
-    public function getPrice(): ?float
+    public function getName(): string
     {
-        return $this->price;
+        return $this->name;
+    }
+
+    public function getSupplierInternalCode(): string
+    {
+        return $this->supplier_internal_code;
+    }
+
+    public function getTecdocCode(): string
+    {
+        return $this->tecdoc_code;
+    }
+
+    public function getCategoryName(): string
+    {
+        return $this->category_name;
+    }
+
+    public function getProvider(): string
+    {
+        return $this->provider;
+    }
+
+    public function getUnits(): string
+    {
+        return $this->units;
+    }
+
+    public function getEan(): string
+    {
+        return $this->ean;
+    }
+
+    public function getOrigin(): string
+    {
+        return $this->origin;
     }
 
     public function getAvailability(): ?string
@@ -56,5 +91,8 @@ class SuppliersProduct extends Model
         return $this->url;
     }
 
-
+    public function getOriginalData(): ?string
+    {
+        return $this->original_data;
+    }
 }
