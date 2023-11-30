@@ -33,9 +33,7 @@
         </form>
         <div v-if="loading" class="mt-3 flex justify-center">
           <span
-            
             class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 transition ease-in-out duration-150"
-            
           >
             <svg
               class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -66,40 +64,126 @@
             <div
               class="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25"
             >
-              <div
+              <!-- <div
                 style="background-position: 10px 10px"
                 class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"
-              ></div>
+              ></div> -->
               <div class="relative rounded-xl overflow-auto">
-                <div class="shadow-sm overflow-hidden my-8">
+                <div class="shadow-sm overflow-hidden">
+                  <div class="relative ms-3 my-3">
+                    <div class="relative flex items-center mt-4 md:mt-0">
+                      <span class="absolute">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                          />
+                        </svg>
+                      </span>
+
+                      <input
+                        type="text"
+                        placeholder="Hledat"
+                        class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                      />
+                    </div>
+                    <fieldset
+                      class="border grid grid-cols-3 gap-2 border-solid border-gray-300 p-3 w-full me-3 my-3 bg-w"
+                    >
+                      <legend>Filtry</legend>
+                      <div>
+                        <label for="searchCode" class="text-sm">Kód produktu</label>
+                        <input
+                          type="text"
+                          id="searchCode"
+                          placeholder="Hledat"
+                          class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                      </div>
+                      <div>
+                        <label for="searchProductName" class="text-sm"
+                          >Název produktu</label
+                        >
+                        <input
+                          type="text"
+                          id="searchProductName"
+                          placeholder="Hledat"
+                          class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                      </div>
+                      <div>
+                        <label for="searchSupplier" class="text-sm">Dodavatel</label>
+                        <input
+                          type="text"
+                          id="searchSupplier"
+                          placeholder="Hledat"
+                          class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                      </div>
+                      <div>
+                        <label for="searchPrice" class="text-sm">Cena</label>
+                        <input
+                          type="text"
+                          id="searchPrice"
+                          placeholder="Hledat"
+                          class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                      </div>
+                      <div>
+                        <label for="searchAvailability" class="text-sm">Dostupnost</label>
+                        <input
+                          type="text"
+                          id="searchAvailability"
+                          placeholder="Hledat"
+                          class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                      </div>
+                    </fieldset>
+                  </div>
+
                   <table class="border-collapse table-auto w-full text-sm">
                     <thead>
                       <tr>
                         <th
+                          @click="sortBy('product_code')"
                           class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
                           Kód produktu
+                          <span :class="sortIcon('product_code')"> </span>
                         </th>
                         <th
+                          @click="sortBy('product_name')"
                           class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
-                          Název produktu
+                          Název produktu<span :class="sortIcon('product_name')"> </span>
                         </th>
                         <th
+                          @click="sortBy('supplier_name')"
                           class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
-                          Dodavatel
+                          Dodavatel<span :class="sortIcon('supplier_name')"> </span>
                         </th>
                         <th
+                          @click="sortBy('price')"
                           class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
-                          Cena
+                          Cena<span :class="sortIcon('price')"> </span>
                         </th>
                         <th
+                          @click="sortBy('availability')"
                           class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
-                          Dostupnost
+                          Dostupnost<span :class="sortIcon('availability')"> </span>
                         </th>
+                        <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"></th>
                       </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-slate-800">
@@ -129,6 +213,7 @@
                         >
                           {{ product.availability }}
                         </td>
+                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"><i class="bi bi-eye text-lg"></i></td>
                       </tr>
                     </tbody>
                   </table>
@@ -155,7 +240,9 @@ export default {
     return {
       searchCode: null,
       products: [],
-      loading: false
+      loading: false,
+      sortKey: '',
+      sortDirection: 1,
     };
   },
 
@@ -170,6 +257,45 @@ export default {
         self.loading = false;
       });
     },
+
+    sortBy(key) {
+      if (this.sortKey === key) {
+        this.sortDirection = this.sortDirection * -1;
+      } else {
+        this.sortDirection = 1;
+        this.sortKey = key;
+      }
+
+      this.sortProducts();
+    },
+
+    sortProducts() {
+      this.products.sort((a, b) => {
+        const key = this.sortKey;
+        const direction = this.sortDirection;
+
+        if (a[key] > b[key]) return direction;
+        if (a[key] < b[key]) return -direction;
+        return 0;
+      });
+    },
+
+    sortIcon(key) {
+      let self = this;
+      if (this.sortKey === key) {
+        if (self.sortDirection === 1) {
+          return 'bi bi-caret-down-fill';
+        } else return 'bi bi-caret-up-fill';
+      }
+      return;
+    },
+
+    /* iconStyle(key) {
+      if (this.sortKey === key) {
+        return { transform: `rotate(${this.sortDirection === 1 ? 0 : 180}deg)` };
+      }
+      return {};
+    }, */
   },
 };
 </script>
