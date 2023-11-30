@@ -9,6 +9,8 @@ Alpine.start();
 
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
 
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import SearchComponent from './components/SearchComponent.vue';
 
 
