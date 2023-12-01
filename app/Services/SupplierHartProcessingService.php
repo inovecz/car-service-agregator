@@ -27,10 +27,10 @@ class SupplierHartProcessingService
     {
         $csvData = null;
 
-        if (Storage::disk('public')->exists('upload/54871_kth.csv')) { //
-            /*  $zip = Zip::open(\storage_path('app/public/upload/54871_kth.zip'));
+        if (Storage::disk('public')->exists('upload/54871_kth.csv')) { 
+             $zip = Zip::open(\storage_path('app/public/upload/54871_kth.zip'));
              $zip->extract(\storage_path('app/public/upload'));
-             Storage::disk('public')->delete('upload/54871_kth.zip'); */
+             Storage::disk('public')->delete('upload/54871_kth.zip');
 
             $parsedCsv = \League\Csv\Reader::createFromPath(\storage_path('app/public/upload/54871_kth.csv'), 'r');
             $parsedCsv->setDelimiter(';');
