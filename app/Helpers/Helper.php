@@ -1,7 +1,7 @@
 <?php
 
 
-if (!function_exists('csv_to_assoc')) {
+/* if (!function_exists('csv_to_assoc')) {
     function csv_to_assoc(string $csv, string $divider = ';'): array
     {
         $rows = array_map(static fn ($row) => explode($divider, $row), preg_split('/\r\n|\r|\n/', preg_replace('/[\x{200B}-\x{200D}\x{FEFF}]/u', '', $csv)));
@@ -10,9 +10,9 @@ if (!function_exists('csv_to_assoc')) {
         foreach ($rows as $row) {
             if ($row[0] === "") {
                 continue;
-            }
+            };
             $output[] = array_combine($header, $row);
         }
         return $output;
     }
-}
+} */
