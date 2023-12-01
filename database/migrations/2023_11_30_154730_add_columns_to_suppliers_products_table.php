@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->string('category_name')->nullable()->after('tecdoc_code');
             $table->string('provider')->nullable()->after('category_name');
             $table->string('units')->nullable()->after('provider');
-            $table->string('ean')->nullable()->after('units');
+            $table->longText('ean')->nullable()->after('units');
             $table->string('origin')->nullable()->after('ean');
             $table->json('original_data')->nullable()->after('url');
 
