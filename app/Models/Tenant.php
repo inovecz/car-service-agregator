@@ -11,6 +11,12 @@ class Tenant extends Model
 
     protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
 
+    //Relationships
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'tenant_uuid', 'uuid');
+    }
+
     //Getters
     public function getId(): int
     {
