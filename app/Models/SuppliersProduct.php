@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Supplier;
 use App\Models\ProductsCode;
 use App\Models\SuppliersProductsPrice;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class SuppliersProduct extends Model
+class SuppliersProduct extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

@@ -8,6 +8,7 @@ use App\Models\SuppliersProductsPrice;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Storage;
 use Zip;
+use App\Services\ImageUploadService;
 
 class SupplierHartProcessingService
 {
@@ -26,11 +27,12 @@ class SupplierHartProcessingService
     public function processTenant($tenant, $supplier)
     {
         $csvData = null;
+        $imageUrl = null;
 
-        if (Storage::disk('public')->exists('upload/54871_kth.csv')) { 
-             $zip = Zip::open(\storage_path('app/public/upload/54871_kth.zip'));
-             $zip->extract(\storage_path('app/public/upload'));
-             Storage::disk('public')->delete('upload/54871_kth.zip');
+        if (Storage::disk('public')->exists('upload/54871_kth.zip')) {
+            $zip = Zip::open(\storage_path('app/public/upload/54871_kth.zip'));
+            $zip->extract(\storage_path('app/public/upload'));
+            Storage::disk('public')->delete('upload/54871_kth.zip');
 
             $parsedCsv = \League\Csv\Reader::createFromPath(\storage_path('app/public/upload/54871_kth.csv'), 'r');
             $parsedCsv->setDelimiter(';');
@@ -58,28 +60,36 @@ class SupplierHartProcessingService
                     'origin' => $csvDataItem['ORIGIN'],
                     'original_data' => json_encode($csvDataItem)
                 ];
-                
-                $existingProduct = SuppliersProduct::where('supplier_internal_code', $csvDataItem['KOD_HART'])->first();
+
+                $product = SuppliersProduct::where('supplier_internal_code', $csvDataItem['KOD_HART'])->first();
 
                 $csvDataItemPriceArray = [
                     'tenant_id' => $tenant->getId(),
                     'price' => $csvDataItem['CENA'],
                 ];
 
-                if ($existingProduct) {
-                    $existingProduct->update($csvDataItemArray);
-                    $existingProductPrice = SuppliersProductsPrice::where('tenant_id', $tenant->getId())->where('supplier_product_id', $existingProduct->getId())->first();
-                    if ($existingProductPrice) {
-                        $existingProductPrice->update($csvDataItemPriceArray);
+                if ($product) {
+                    $product->update($csvDataItemArray);
+                    $productPrice = SuppliersProductsPrice::where('tenant_id', $tenant->getId())->where('supplier_product_id', $product->getId())->first();
+                    if ($productPrice) {
+                        $productPrice->update($csvDataItemPriceArray);
                     } else {
-                        $csvDataItemPriceArray['supplier_product_id'] = $existingProduct->getId();
+                        $csvDataItemPriceArray['supplier_product_id'] = $product->getId();
                         $newSupplierProductPrice = SuppliersProductsPrice::create($csvDataItemPriceArray);
                     }
                 } else {
-                    $newSupplierProduct = SuppliersProduct::create($csvDataItemArray);
-                    $csvDataItemPriceArray['supplier_product_id'] = $newSupplierProduct->getId();
-                    $newSupplierProductPrice = SuppliersProductsPrice::create($csvDataItemPriceArray);
+                    $product = SuppliersProduct::create($csvDataItemArray);
+                    $csvDataItemPriceArray['supplier_product_id'] = $product->getId();
+                    $productPrice = SuppliersProductsPrice::create($csvDataItemPriceArray);
                 };
+
+
+
+                $imageUrl = 'https://cdn.myshoptet.com/usr/www.gamadarky.cz/user/shop/big/151285_spejbl-a-hurvinek.png?6377f87c';
+                if ($imageUrl) {
+                    $service = new ImageUploadService();
+                    $uploadImage = $service->process($product, $imageUrl);
+                }
 
             }
         }
