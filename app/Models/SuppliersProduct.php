@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Supplier;
 use App\Models\ProductsCode;
 use App\Models\SuppliersProductsPrice;
@@ -26,7 +27,7 @@ class SuppliersProduct extends Model
         return $this->hasOne(ProductsCode::class, 'code', 'product_code');
     }
 
-    public function suppliersProductsPrices(): HasMany
+    public function suppliersProductsPrices(): ?HasMany
     {
         return $this->hasMany(SuppliersProductsPrice::class, 'supplier_product_id', 'id');
     }

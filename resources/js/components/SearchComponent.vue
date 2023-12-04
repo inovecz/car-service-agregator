@@ -2,7 +2,7 @@
   <div class="mt-3">
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
       <div class="p-6 text-gray-900">
-        <form @submit.prevent="searchProducts()">
+        <form @submit.prevent="searchProducts()" class="mb-8">
           <div class="flex items-center justify-center">
             <div class="flex border-2 rounded w-full">
               <input
@@ -11,7 +11,7 @@
                 id="searchCode"
                 name="searchCode"
                 class="px-4 py-2 w-full"
-                placeholder="Search..."
+                placeholder="Hledat..."
               />
               <button
                 type="submit"
@@ -31,6 +31,7 @@
             </div>
           </div>
         </form>
+        <div v-if="!loading && !products?.length" class="mt-4 flex justify-center font-semibold">Nejsou výsledky k zobrazení.</div>
         <div v-if="loading" class="mt-3 flex justify-center">
           <span
             class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 transition ease-in-out duration-150"
@@ -130,32 +131,32 @@
                       <tr>
                         <th
                           @click="sortBy('product_code')"
-                          class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                          class="sortable border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
                           Kód produktu
                           <span :class="sortIcon('product_code')"> </span>
                         </th>
                         <th
                           @click="sortBy('product_name')"
-                          class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                          class="sortable border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
                           Název produktu<span :class="sortIcon('product_name')"> </span>
                         </th>
                         <th
                           @click="sortBy('supplier_name')"
-                          class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                          class="sortable border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
                           Dodavatel<span :class="sortIcon('supplier_name')"> </span>
                         </th>
                         <th
                           @click="sortBy('price')"
-                          class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                          class="sortable border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
                           Cena<span :class="sortIcon('price')"> </span>
                         </th>
                         <th
                           @click="sortBy('availability')"
-                          class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                          class="sortable border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         >
                           Dostupnost<span :class="sortIcon('availability')"> </span>
                         </th>
