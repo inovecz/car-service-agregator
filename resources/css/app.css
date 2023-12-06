@@ -5,3 +5,11 @@
 table tr th.sortable:hover {
   cursor: pointer;
 }
+
+img.image_preview {
+    max-width: 30px;
+}
+
+img.product_preview {
+    max-width: 500px;
+}

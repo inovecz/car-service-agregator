@@ -31,7 +31,12 @@
             </div>
           </div>
         </form>
-        <div v-if="!loading && !products?.length" class="mt-4 flex justify-center font-semibold">Nejsou výsledky k zobrazení.</div>
+        <div
+          v-if="!loading && !products?.length"
+          class="mt-4 flex justify-center font-semibold"
+        >
+          Nejsou výsledky k zobrazení.
+        </div>
         <div v-if="loading" class="mt-3 flex justify-center">
           <span
             class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 transition ease-in-out duration-150"
@@ -73,7 +78,7 @@
                 <div class="shadow-sm overflow-hidden">
                   <div class="relative ms-3 my-3">
                     <fieldset
-                      class="border grid grid-cols-3 gap-2 border-solid border-gray-300 p-3 w-full me-3 my-3 bg-w"
+                      class="border grid grid-cols-3 gap-2 border-solid border-gray-300 p-3 w-full me-3 my-3 mb-8 bg-w"
                     >
                       <legend>Filtry</legend>
                       <div>
@@ -162,6 +167,11 @@
                         </th>
                         <th
                           class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                        >
+                          Náhled
+                        </th>
+                        <th
+                          class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
                         ></th>
                       </tr>
                     </thead>
@@ -194,6 +204,16 @@
                         </td>
                         <td
                           class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"
+                        >
+                          <img
+                            v-if="product && product.media_url"
+                            :src="product.media_url"
+                            class="image_preview"
+                            @click="toggleModal(product)"
+                          />
+                        </td>
+                        <td
+                          class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"
                           style="display: table-cell"
                         >
                           <div class="flex justify-end">
@@ -218,6 +238,35 @@
         </div>
       </div>
     </div>
+
+    <div
+      v-show="isOpen"
+      class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 h-full"
+    >
+      <div class="max-w-2xl p-6 bg-white rounded-md shadow-xl">
+        <div class="flex items-center justify-between">
+          <h3 class="text-2xl">Náhled produktu</h3>
+          <svg
+            @click="toggleModal()"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-8 h-8 text-primary-900 cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <div class="mt-4">
+          <img :src="productForModal?.media_url" class="product_preview"/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -234,6 +283,8 @@ export default {
       loading: false,
       sortKey: '',
       sortDirection: 1,
+      isOpen: false,
+      productForModal: null
     };
   },
 
@@ -281,6 +332,14 @@ export default {
       return;
     },
 
+    toggleModal(product) {
+      this.isOpen = !this.isOpen;
+      if (product) {
+        this.productForModal = product;
+      } else {
+        this.productForModal = null;
+      }
+    },
     /* iconStyle(key) {
       if (this.sortKey === key) {
         return { transform: `rotate(${this.sortDirection === 1 ? 0 : 180}deg)` };
