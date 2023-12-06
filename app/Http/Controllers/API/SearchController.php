@@ -15,16 +15,27 @@ class SearchController extends Controller
     {
         $searchCode = $request->query('productCode');
 
-        $codesResult = ProductsCode::where('code', 'like', '%' . $searchCode . '%')->get();
+        //$codesResult = ProductsCode::where('code', 'like', '%' . $searchCode . '%')->get();
 
         $productsArray = [];
 
-        foreach ($codesResult as $code) {
+        /* foreach ($codesResult as $code) {
             $suppliersProduct = SuppliersProduct::where('product_code', $code->getCode())->first();
             $productsArray[] = new SuppliersProductResource($suppliersProduct);
-        }
+        } */
 
-        if ($codesResult && !empty($productsArray)) {
+
+        $suppliersProducts = SuppliersProduct::where('product_code', $searchCode)->get();
+
+        foreach ($suppliersProducts as $suppliersProduct) {
+            $productsArray[] = new SuppliersProductResource($suppliersProduct);
+
+        }
+        //$productsArray[] = new SuppliersProductResource($suppliersProduct);
+
+
+        //if ($codesResult && !empty($productsArray)) {
+        if (!empty($productsArray)) {
             return response()->json([
                 'products' => $productsArray
         ]);
