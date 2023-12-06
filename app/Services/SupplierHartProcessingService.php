@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Supplier;
 use App\Models\SuppliersProduct;
 use App\Models\SuppliersProductsPrice;
+use App\Models\SyncLog;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Storage;
 use Zip;
@@ -26,6 +27,12 @@ class SupplierHartProcessingService
 
     public function processTenant($tenant, $supplier)
     {
+        SyncLog::create([
+            'tenant_uuid' => $tenant->getUuid(),
+            'supplier_name' => $supplier->getName(),
+            'status' => 'RUNNING'
+        ]);
+
         $csvData = null;
         $imageUrl = null;
 
@@ -93,6 +100,12 @@ class SupplierHartProcessingService
 
             }
         }
+
+        SyncLog::create([
+            'tenant_uuid' => $tenant->getUuid(),
+            'supplier_name' => $supplier->getName(),
+            'status' => 'DONE'
+        ]);
 
         return true;
     }
