@@ -85,7 +85,7 @@ class SupplierHartProcessingService
 
 
 
-                $imageUrl = 'https://cdn.myshoptet.com/usr/www.gamadarky.cz/user/shop/big/151285_spejbl-a-hurvinek.png?6377f87c';
+                //$imageUrl = 'https://cdn.myshoptet.com/usr/www.gamadarky.cz/user/shop/big/151285_spejbl-a-hurvinek.png?6377f87c';
                 if ($imageUrl) {
                     $service = new ImageUploadService();
                     $uploadImage = $service->process($product, $imageUrl);

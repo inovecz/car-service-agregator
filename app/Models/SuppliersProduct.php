@@ -105,4 +105,9 @@ class SuppliersProduct extends Model implements HasMedia
     {
         return $this->original_data;
     }
+
+    public function getMediaUrl()
+    {
+        return $this->getFirstMedia('Images') ? $this->getFirstMedia('Images')->getFullUrl() : null;
+    }
 }
