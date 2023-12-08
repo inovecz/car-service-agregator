@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sync_log', function (Blueprint $table) {
+        Schema::create('sync_logs', function (Blueprint $table) {
             $table->id();
             $table->string('tenant_uuid');
             $table->string('supplier_name');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sync_log');
+        Schema::dropIfExists('sync_logs');
     }
 };

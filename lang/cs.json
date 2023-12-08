@@ -1,5 +1,6 @@
 {
   "A new verification link has been sent to the email address you provided during registration.": "Na e-mailovou adresu, kterou jste uvedli při registraci, byl odeslán nový ověřovací odkaz.",
+  "Activated": "Aktivováno",
   "Already registered?": "Už jste registrovaní?",
   "Confirm": "Potvrdit",
   "Confirm Password": "Potvrzení hesla",
@@ -7,9 +8,11 @@
   "Email": "E-mail",
   "Email Password Reset Link": "Odeslat odkaz na obnovení hesla",
   "Ensure your account is using a long, random password to stay secure.": "Ujistěte se, že váš účet používá dlouhé, náhodné heslo, abyste zůstali v bezpečí.",
+  "Filename": "Název souboru",
   "Forgot your password?": "Zapomněli jste své heslo?",
   "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Zapomněli jste heslo? Žádný problém. Dejte nám vědět svou e-mailovou adresu a my vám zašleme e-mail s odkazem pro obnovení hesla, který vám umožní vybrat si nové.",
   "Dashboard": "Nástěnka",
+  "Integration with Hart": "Konektor na dodavatele Hart",
   "Log in": "Přihlásit",
   "Log out": "Odhlásit",
   "Log Out": "Odhlásit",

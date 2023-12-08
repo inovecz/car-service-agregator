@@ -11,7 +11,7 @@
                 id="searchCode"
                 name="searchCode"
                 class="px-4 py-2 w-full"
-                placeholder="Hledat..."
+                placeholder="Hledat podle kódu"
               />
               <button
                 type="submit"

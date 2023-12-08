@@ -13,13 +13,17 @@
                 </div>
             </div>
 
-           {{--  <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    @include('tenant.partials.update-password-form')
+                    @include('tenant.partials.integration-hart-form')
                 </div>
-            </div> --}}
+            </div>
 
-          
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('tenant.partials.integration-lkq-form')
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>
