@@ -20,7 +20,7 @@
                 <span class="ml-2 text-sm text-gray-600">{{ __('Activated') }}</span>
             </label>
         </div>
-        <?php var_dump($settings); ?>
+     
         <div>
             <x-input-label for="hart_filename" :value="__('Filename')" />
             <x-text-input id="hart_filename" name="settings[integration.hart][filename]" type="text"
