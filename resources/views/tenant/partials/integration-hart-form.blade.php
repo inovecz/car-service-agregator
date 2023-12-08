@@ -16,17 +16,20 @@
                 <input id="hart_activated" type="checkbox"
                     class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
                     name="settings[integration.hart][activated]" value="true"
-                    {{ $settings['integration.hart']['activated'] === true ? 'checked' : '' }}>
+                    {{ isset($settings['integration.hart']['activated']) ? ($settings['integration.hart']['activated'] === 'true' ? 'checked' : '') : '' }}>
                 <span class="ml-2 text-sm text-gray-600">{{ __('Activated') }}</span>
             </label>
         </div>
-
+        <?php var_dump($settings); ?>
         <div>
             <x-input-label for="hart_filename" :value="__('Filename')" />
             <x-text-input id="hart_filename" name="settings[integration.hart][filename]" type="text"
-                class="mt-1 block w-full" :value="old('settings.integration.hart.filename', $settings['integration.hart']['filename'])" />
+                class="mt-1 block w-full" :value="old(
+                    'settings.integration.hart.filename',
+                    isset($settings['integration.hart']['filename']) ? $settings['integration.hart']['filename'] : '',
+                )" />
 
-            <x-input-error class="mt-2" :messages="$errors->get('settings.hart_filename')" />
+            <x-input-error class="mt-2" :messages="$errors->get('settings[integration.hart][filename]')" />
         </div>
 
 

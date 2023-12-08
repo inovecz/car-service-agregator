@@ -18,25 +18,26 @@ class TenantController extends Controller
      */
     public function edit(Request $request): View
     {
+        $preparedSettings = null; 
         $settings = Auth::user()->tenant->tenantSettings()->get();
         foreach ($settings as $item) {
             $preparedSettings[$item->getKey()] = $item->value; 
-            if ($item->value['activated'] == 'true') {
+            /* if (isset($item->value['activated']) && $item->value['activated'] == 'true') {
                 $preparedSettings[$item->getKey()]['activated'] = true; 
-            } elseif ($item->value['activated'] == 'false') {
+            } elseif (isset($item->value['activated']) && $item->value['activated'] == 'false') {
                 $preparedSettings[$item->getKey()]['activated'] = false; 
-            } 
+            }  */
         }
 
         return view('tenant.edit', [
             'user' => $request->user(),
             'tenant' => Auth::user()->tenant,
-            'settings' => $preparedSettings
+            'settings' => $preparedSettings ? $preparedSettings : null
         ]);
     }
 
     /**
-     * Update the user's profile information.
+     * Update the tenant's profile information.
      */
     public function update(TenantUpdateRequest $request): RedirectResponse
     {

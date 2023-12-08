@@ -37,9 +37,9 @@ class TenantSettingsController extends Controller
 
             $existingRecord = Auth::user()->tenant->tenantSettings()->where('tenant_id', $tenantId)->where('key', $key)->first();
             if ($existingRecord) {
-                Auth::user()->tenant->tenantSettings()->where('tenant_id', $tenantId)->where('key', $key)->update(['tenant_id' => $tenantId, 'key' => $key, 'value' => json_encode($value)]);
+                Auth::user()->tenant->tenantSettings()->where('tenant_id', $tenantId)->where('key', $key)->update(['tenant_id' => $tenantId, 'key' => $key, 'value' => $value]);
             } else {
-                Auth::user()->tenant->tenantSettings()->create(['tenant_id' => $tenantId, 'key' => $key, 'value' => json_encode($value)]);
+                Auth::user()->tenant->tenantSettings()->create(['tenant_id' => $tenantId, 'key' => $key, 'value' => $value]);
             }
         }
        
