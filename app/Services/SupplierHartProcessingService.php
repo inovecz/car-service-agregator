@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Supplier;
 use App\Models\SuppliersProduct;
 use App\Models\SuppliersProductsPrice;
+use App\Models\TenantSetting;
 use App\Models\SyncLog;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Storage;
@@ -19,13 +20,20 @@ class SupplierHartProcessingService
         $supplier = Supplier::where('name', 'HART')->first();
 
         foreach ($tenants as $tenant) {
-            $this->processTenant($tenant, $supplier);
+
+            $tenantSetting = TenantSetting::where('tenant_id', $tenant->getId())->where('key', 'integration.hart')->first();
+
+            $isActivated = $tenantSetting['value']['activated'];
+
+            if($isActivated) {
+                $this->processTenant($tenant, $supplier, $tenantSetting);
+            }
         };
 
         return true;
     }
 
-    public function processTenant($tenant, $supplier)
+    public function processTenant($tenant, $supplier, $tenantSetting)
     {
         SyncLog::create([
             'tenant_uuid' => $tenant->getUuid(),
@@ -35,13 +43,17 @@ class SupplierHartProcessingService
 
         $csvData = null;
         $imageUrl = null;
+        $fileName = pathinfo($tenantSetting['value']['filename'], PATHINFO_FILENAME);
 
-        if (Storage::disk('public')->exists('upload/54871_kth.zip')) {
+        if ($fileName && Storage::disk('public')->exists('upload/' . $fileName . '.zip')) {
+
+            //extract zip file
             $zip = Zip::open(\storage_path('app/public/upload/54871_kth.zip'));
             $zip->extract(\storage_path('app/public/upload'));
             Storage::disk('public')->delete('upload/54871_kth.zip');
 
-            $parsedCsv = \League\Csv\Reader::createFromPath(\storage_path('app/public/upload/54871_kth.csv'), 'r');
+            //process of csv file
+            $parsedCsv = \League\Csv\Reader::createFromPath(\storage_path('app/public/upload/' . $fileName . '.csv'), 'r');
             $parsedCsv->setDelimiter(';');
             $parsedCsv->setHeaderOffset(0);
             $header = $parsedCsv->getHeader();
