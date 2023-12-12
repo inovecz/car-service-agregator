@@ -9,9 +9,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Hash;
 
 class AuthenticatedSessionController extends Controller
 {
+
     /**
      * Display the login view.
      */
@@ -29,7 +31,23 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $user = Auth::user();
+
+        if ($user &&
+            Hash::check($request->password, $user->password)) {
+            //Auth::logoutOtherDevices($request->password);
+            Auth::logoutOtherDevices($request->get('password'));
+            
+            
+        }
+
+        $subscriptionIsActive = $user->tenant->isSubscriptionActive();
+
+        if ($subscriptionIsActive) {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } else {
+            return redirect()->route('tenant.subscription-inactive');
+        }
     }
 
     /**
