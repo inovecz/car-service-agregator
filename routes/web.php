@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/tenant-settings-integration', [TenantSettingsController::class, 'update'])->name('tenant-settings-integration.update');
     Route::get('/tenant-settings', [TenantController::class, 'edit'])->name('tenant-settings.edit');
     Route::post('/tenant-settings', [TenantController::class, 'update'])->name('tenant-settings.update');
+    Route::get('/tenant-subscription-inactive', [TenantController::class, 'subscriptionInactive'])->name('tenant.subscription-inactive');
     
 });
 

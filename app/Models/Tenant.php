@@ -5,12 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
 
 class Tenant extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'active_date_to' => 'datetime:Y-m-d HH:MM:SS',
+    ];
 
     //Relationships
     public function users(): HasMany
@@ -39,8 +44,12 @@ class Tenant extends Model
         return $this->name;
     }
 
-    public function getActiveDateTo(): ?DateTime
+    public function getActiveDateTo()
     {
         return $this->active_date_to;
+    }
+
+    public function isSubscriptionActive() {
+        return $this->getActiveDateTo() > Carbon::now();
     }
 }
