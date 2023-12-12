@@ -38,4 +38,9 @@ class Tenant extends Model
     {
         return $this->name;
     }
+
+    public function getActiveDateTo(): ?DateTime
+    {
+        return $this->active_date_to;
+    }
 }
