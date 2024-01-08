@@ -17,7 +17,7 @@ class SuppliersProduct extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = ['created_at', 'updated_at'];
 
     //Relationships
     public function supplier(): ?HasOne
@@ -32,7 +32,7 @@ class SuppliersProduct extends Model implements HasMedia
 
     public function suppliersProductsPrices(): ?HasMany
     {
-        return $this->hasMany(SuppliersProductsPrice::class, 'supplier_product_id', 'id');
+        return $this->hasMany(SuppliersProductsPrice::class, 'supplier_product_identifier', 'supplier_product_identifier');
     }
 
     //Getters

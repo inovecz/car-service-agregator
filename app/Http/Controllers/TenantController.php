@@ -18,14 +18,14 @@ class TenantController extends Controller
      */
     public function edit(Request $request): View
     {
-        $preparedSettings = null; 
+        $preparedSettings = null;
         $settings = Auth::user()->tenant->tenantSettings()->get();
         foreach ($settings as $item) {
-            $preparedSettings[$item->getKey()] = $item->value; 
+            $preparedSettings[$item->getKey()] = $item->value;
             /* if (isset($item->value['activated']) && $item->value['activated'] == 'true') {
-                $preparedSettings[$item->getKey()]['activated'] = true; 
+                $preparedSettings[$item->getKey()]['activated'] = true;
             } elseif (isset($item->value['activated']) && $item->value['activated'] == 'false') {
-                $preparedSettings[$item->getKey()]['activated'] = false; 
+                $preparedSettings[$item->getKey()]['activated'] = false;
             }  */
         }
 
@@ -41,10 +41,18 @@ class TenantController extends Controller
      */
     public function update(TenantUpdateRequest $request): RedirectResponse
     {
-       // $request->user()->tenant()->fill($request->validated());
+        // $request->user()->tenant()->fill($request->validated());
 
         $request->user()->tenant()->update($request->validated());
 
         return Redirect::route('tenant-settings.edit')->with('status', 'tenant-settings-updated');
+    }
+
+
+    public function subscriptionInactive(Request $request): View
+    {
+        return view('tenant.subscription-inactive', [
+            'tenant' => Auth::user()->tenant,
+        ]);
     }
 }

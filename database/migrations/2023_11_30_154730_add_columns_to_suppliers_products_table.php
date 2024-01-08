@@ -46,9 +46,6 @@ return new class () extends Migration {
             $table->dropColumn('original_data');
 
             $table->double('price')->nullable()->after('product_code');
-
-
-
         });
     }
 };

@@ -21,7 +21,7 @@ class SuppliersProductResource extends JsonResource
              'supplier_name' => $this->supplier->getName(),
              'product_name' => $this->getName(),
              //'product_name' => $this->productCode->getName(),
-             'price' => $this->suppliersProductsPrices(),
+             'price' => $this->suppliersProductsPrices->first(),
              'availability' => $this->getAvailability(),
              'url' => $this->getUrl(),
              'media_url' => $this->getMediaUrl()

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Models\ProductsCode;
 use App\Models\SuppliersProduct;
+use App\Services\SupplierLKQProcessingService;
 use App\Http\Resources\SuppliersProductResource;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 
 class SearchController extends Controller
 {
@@ -26,6 +28,14 @@ class SearchController extends Controller
 
 
         $suppliersProducts = SuppliersProduct::where('product_code', $searchCode)->get();
+        /* $suppliersProducts = new Collection; */
+
+        $lkqService = new SupplierLKQProcessingService();
+        $lkqProducts = $lkqService->process($searchCode);
+
+        if ($lkqProducts) {
+            $suppliersProducts->push($lkqProducts);
+        }
 
         foreach ($suppliersProducts as $suppliersProduct) {
             $productsArray[] = new SuppliersProductResource($suppliersProduct);
@@ -45,5 +55,7 @@ class SearchController extends Controller
             ]);
         }
     }
+
+    public function searchProductsFromLKQ() {}
 
 }

@@ -14,10 +14,14 @@ class SuppliersProductsPrice extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'price' => 'double'
+    ];
+
     //Relationships
     public function suppliersProduct(): HasOne
     {
-        return $this->hasOne(SuppliersProduct::class);
+        return $this->hasOne(SuppliersProduct::class, 'supplier_product_identifier', 'supplier_product_identifier');
     }
 
     //Getters
