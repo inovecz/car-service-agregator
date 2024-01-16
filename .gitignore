@@ -20,3 +20,11 @@ public/certificat.pdf
 
 # Sentry Auth Token
 .env.sentry-build-plugin
+
+config_live/.env
+
+deployment.ini
+
+deployment.log
+
+deployment.phar
