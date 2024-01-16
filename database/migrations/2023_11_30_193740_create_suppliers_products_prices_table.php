@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('tenant_id');
             $table->unsignedBigInteger('supplier_product_id');
-            $table->double(16,4);
+            $table->string('price');
             $table->timestamps();
         });
     }
